@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="template :: head(~{::title})">
+    <title>Sign Up • Dreamfit</title>
+</head>
+<body>
+<div th:replace="template::top-bar"></div>
+<div th:replace="template :: main(~{:: div.maincontent})">
+    <div class="maincontent d-flex flex-nowrap p-lg-3 justify-content-center align-content-center" style="height:100%;
+       background-image: url('img/271678.jpg');
+       background-size: cover; border: 1px solid #b8b8b8; border-radius: 0.5rem;">
+        <div class="mr-auto align-self-center" style="margin-left: 5rem;">
+            <div class="row d-flex justify-content-start form">
+                <div class=" mb-5 mb-md-0">
+                    <form class="form" id="registration" method="post" th:object="${newUser}">
+                        <div class="alert alert-danger col-md-12 mb-3" role="alert" style="display: none"
+                             th:text="#{login.account-exists}">
+                        </div>
+                        <div class="form-group col-md-11">
+                            <label class="control-label"
+                                   th:text="#{login.email}">E-mail</label>
+                            <input class="form-control required"
+                                   th:field="*{username}"
+                                   th:style="${#fields.hasErrors('username')} ? 'border: 2px solid red;' : ''"/>
+                            <p id="usernameError" class="errorServerValidation"></p>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <label class="control-label"
+                                   th:text="#{login.password}"></label>
+                            <input class="form-control required"
+                                   th:field="*{password}" type="password"/>
+                            <p id="passwordError" class="errorServerValidation"></p>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <label class="control-label"
+                                   th:text="#{login.first-name}"></label>
+                            <input class="form-control required"
+                                   th:field="*{userProfile.firstName}"/>
+                            <p id="userProfile.firstNameError" class="errorServerValidation"></p>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <label class="control-label"
+                                   th:text="#{login.last-name}"></label>
+                            <input class="form-control required"
+                                   th:field="*{userProfile.lastName}"/>
+                            <p id="userProfile.lastNameError" class="errorServerValidation"></p>
+                        </div>
+                        <div class="form-group col-md-11">
+                            <label class="control-label"
+                                   th:text="#{login.first-name-ua}"></label>
+                            <input class="form-control"
+                                   th:field="*{userProfile.firstNameUa}"/>
+                            <p id="userProfile.firstNameUaError" class="errorServerValidation"></p>
+                        </div>
+                    </form>
+                    <div class="form-group col-md-5">
+                        <input class="pretty-button submit-button d-block w-100" disabled="disabled"
+                               onclick="saveNewUser()" type="submit" th:value="#{login.sign-up}">
+                    </div>
+                    <div class="form-group col-md-12 ">
+                        <span class="mr-2" th:text="#{login.already-signed-up}"></span>
+                        <a style="color:#34ce57" th:href="@{/login}" th:text="#{login.login}"></a>
+                        <div class="col-md-12 mb-3" style="background: #eeeeee">
+                            <div class="loading" style="background: #eeeeee">Processing...</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">filler</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:replace="template :: footer"></div>
+<div th:replace="template :: scripts(~{:: .scripts})">
+    <div class="scripts">
+        <script type="text/javascript" src="js/registration.js"></script>
+    </div>
+</div>
+</body>
+</html>
